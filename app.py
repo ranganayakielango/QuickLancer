@@ -31,27 +31,28 @@ def get_freelance():
 def matchingFreelancers():
     try:
         payload = request.json
-        #query_sentence = "Develop a predictive maintenance system using machine learning to forecast equipment failures before they occur. Utilize historical sensor data from machinery to train models that can identify patterns indicative of potential breakdowns, enabling proactive maintenance and reducing downtime."
-        query_sentence = payload['description']
-        query_embedding = text_sim_model.encode(query_sentence, convert_to_tensor=True)
+        #project_desc = "Develop a predictive maintenance system using machine learning to forecast equipment failures before they occur. Utilize historical sensor data from machinery to train models that can identify patterns indicative of potential breakdowns, enabling proactive maintenance and reducing downtime."
+        project_desc = payload['description']
+        project_tech = payload['technology']
+        project_domain = payload['domain']
+        query_embedding = text_sim_model.encode(project_desc, convert_to_tensor=True)
         query_embedding = query_embedding.reshape(1, -1)
         r = requests.get('https://6358-121-242-242-226.ngrok-free.app/freelance')
         data =  r.json()
-        app.logger.info('############r is')
-        app.logger.info(str(data))
         freelancer_score = {}
         for i in data:
-            app.logger.info('############ i is')
-            app.logger.info(str(i))
-            email = i['emailId']
-            projects = i['projects'].split(',')            
-            sentence_embeddings = text_sim_model.encode(projects, convert_to_tensor=True)
-            similarities = cosine_similarity(query_embedding, sentence_embeddings)
-            tot_sum = 0
-            for i in range(len(projects)):
-                tot_sum += similarities[0][i]
-            avg_score = tot_sum/len(projects)
-            freelancer_score[email] = avg_score
+            domain = i['domain'].split(',')
+            if project_domain in domain:
+                email = i['emailId']
+                experience = i['experience']/10
+                projects = i['projects'].split(',')            
+                sentence_embeddings = text_sim_model.encode(projects, convert_to_tensor=True)
+                similarities = cosine_similarity(query_embedding, sentence_embeddings)
+                tot_sum = 0
+                for i in range(len(projects)):
+                    tot_sum += similarities[0][i]
+                avg_score = tot_sum/len(projects)
+                freelancer_score[email] = avg_score + experience
         return jsonify(freelancer_score)
     except Exception as e:
         error_message = str(e)
