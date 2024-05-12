@@ -1,11 +1,10 @@
 .app{
   display: flex;
   flex-direction: column;
-  width: 100dvw;
+  height: 100dvh;
 }
 .main-content {
   min-width: 500px;
-  width: 100dvw;
   display: grid;
   grid-template-columns: 0.2fr 0.8fr;
 }
@@ -20,4 +19,6 @@
 .sidebar-right{
   min-width: 300px;
   position: relative;
+  height: 90vh;
+  overflow: scroll;
 }

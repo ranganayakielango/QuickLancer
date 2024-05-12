@@ -7,17 +7,25 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedOption, setSelectedOption] = useState('user'); // State for the selected option
+  const [selectedOption, setSelectedOption] = useState('freelancer'); // State for the selected option
   const [error, setError] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (email && password) {
       console.log('Logged in successfully');
+      localStorage.setItem('email', email);
+      localStorage.setItem('role', selectedOption);
+      window.location.href = '/profile';
     } else {
       setError('Please enter email and password');
     }
   };
+
+  const updateUsr = (e) => {
+    console.log(e.target.value);
+    setSelectedOption(e.target.value);
+  }
 
   return (
     <div className="login-container"> {/* Use className instead of style */}
@@ -47,11 +55,11 @@ const Login = () => {
           <label className="label">Select Role:</label>
           <select
             value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
+            onChange={(e) => updateUsr(e)}
             className="input" // You can adjust the styling as needed
           >
             <option value="freelancer">Freelancer</option>
-            <option value="admin">Admin</option>
+            <option value="client">client</option>
           </select>
         </div>
         <button type="submit" className="button">Login</button>

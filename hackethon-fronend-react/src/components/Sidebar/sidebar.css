@@ -3,10 +3,9 @@
 .sidebar {
   min-width: 200px;
   height: 90vh;
-  top: 10vh;
-  left: 0;
   background-color: #e2e2e2;
   color: black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h2 {
@@ -37,6 +36,7 @@
   transition: color 0.3s ease; /* Smooth transition for link color */
 }
 
-.sidebar a:hover {
+.active {
+  background-color: #eee;
   /* color: #846bf3; Link text color on hover */
 }

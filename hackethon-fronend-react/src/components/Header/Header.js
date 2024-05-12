@@ -5,10 +5,15 @@ import profile from '../../assets/profile.png'; // Import the profile image
 
 const Header = () => {
   const [showOptions, setShowOptions] = useState(false);
-
+  
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = '/login';
+  }
 
   return (
     <div className="header">
@@ -23,9 +28,7 @@ const Header = () => {
         {showOptions && (
           <div className="options">
             <ul>
-              <li>Option 1</li>
-              <li>Option 2</li>
-              <li>Option 3</li>
+              <li onClick={()=> logout()}>Logout</li>
             </ul>
           </div>
         )}

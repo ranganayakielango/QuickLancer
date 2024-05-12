@@ -1,0 +1,38 @@
+/* Navbar.css */
+
+.find-job-body{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: space-between;
+  margin: 20px;
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-list li {
+  margin-right: 20px;
+}
+
+.nav-list li a {
+  text-decoration: none;
+  color: #333; /* Default text color */
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent; /* Initially, no border */
+}
+
+.nav-list li a:hover {
+  border-bottom-color: #333; /* Border color on hover */
+}
+
+.nav-list li a.active {
+  border-bottom-color: #333; /* Border color for active item */
+}

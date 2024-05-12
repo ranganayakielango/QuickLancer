@@ -1,8 +1,6 @@
 /* src/components/Header.css */
 
 .header {
-  height: 10svh;
-  width: 100dvw;
   display: flex;
   justify-content: space-between;
   align-items: center;

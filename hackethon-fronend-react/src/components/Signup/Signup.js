@@ -8,7 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [selectedOption, setSelectedOption] = useState('user'); // State for the selected option
+  const [selectedOption, setSelectedOption] = useState('freelancer'); // State for the selected option
   const [error, setError] = useState('');
 
   const handleSignup = (e) => {
@@ -65,7 +65,7 @@ const Signup = () => {
             className="input" // You can adjust the styling as needed
           >
             <option value="freelancer">Freelancer</option>
-            <option value="admin">Admin</option>
+            <option value="client">Client</option>
           </select>
         </div>
         <button type="submit" className="button">Sign Up</button>
