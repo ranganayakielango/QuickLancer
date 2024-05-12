@@ -16,7 +16,7 @@ import com.example.hackathon.entity.Project;
 import com.example.hackathon.service.ProjectService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "https://staging.example.com",
-		"https://app.example.com" }, methods = { RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.PUT,
+		"https://app.example.com","http://10.47.4.251:3000" }, methods = { RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.PUT,
 				RequestMethod.DELETE, RequestMethod.POST })
 @RestController
 public class ProjectController {
@@ -25,7 +25,7 @@ public class ProjectController {
 
 	@GetMapping("/project")
 	private List<Project> getAllClients() {
-		return projectService.getAllProject();
+		return projectService.getAllActiveProjects();
 	}
 	
 	@GetMapping("/project/{id}")

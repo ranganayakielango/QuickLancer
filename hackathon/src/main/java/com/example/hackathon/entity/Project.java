@@ -37,8 +37,17 @@ public class Project {
     private String timezone;
     private String clientEmail;
     private Date date;
+    private int deletedproject;
 
-    public Date getDate() {
+    public int getDeletedproject() {
+		return deletedproject;
+	}
+
+	public void setDeletedproject(int deletedproject) {
+		this.deletedproject = deletedproject;
+	}
+
+	public Date getDate() {
 		return date;
 	}
 

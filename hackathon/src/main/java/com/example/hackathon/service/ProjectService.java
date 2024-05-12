@@ -21,11 +21,10 @@ public class ProjectService {
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
-	public List<Project> getAllProject() {
-
-		List<Project> project = new ArrayList<Project>();
-		projectRepository.findAll().forEach(project1 -> project.add(project1));
-		return project;
+	public List<Project> getAllActiveProjects() {
+	    List<Project> activeProjects = new ArrayList<>();
+	    projectRepository.findByDeletedproject(0).forEach(activeProjects::add);
+	    return activeProjects;
 	}
 	
 	public Project getProjectById(int id) {
@@ -36,6 +35,7 @@ public class ProjectService {
 	public Project save(Project project)   
 	{  project.setComfortTimeFrom((LocalTime.parse(project.getComfortTimeFrom().format(formatter),formatter)));
 	project.setComfortTimeTo((LocalTime.parse(project.getComfortTimeTo().format(formatter),formatter)));
+	project.setDeletedproject(0);
 		return projectRepository.save(project);  
 	}
 
@@ -80,4 +80,8 @@ public class ProjectService {
 		}
 		return null;
 	}
+	
+	public void updateDeletedProjectById(int projectId) {
+        projectRepository.updateDeletedProjectById(projectId, 1);
+    }
 }

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.hackathon.entity.Freelance;
 
 public interface FreelanceRepository extends CrudRepository<Freelance, Integer>{
-
+	Freelance findByEmailId(String emailId);
 }

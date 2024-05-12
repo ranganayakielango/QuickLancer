@@ -49,56 +49,84 @@ public class ProjectStatusService {
 	public void deleteProjectStatus(int projectId, String freelancerEmail) {
 		projectStatusRepository.deleteByProjectIdAndFreelancerEmail(projectId, freelancerEmail);
 	}
+	
 	@Transactional
 	public void saveProjectStatusClientConfirm(int projectId, String freelancerEmail) {
-		ProjectStatus projectStatus = projectStatusRepository.findByProjectIdAndFreelancerEmail(projectId,
+		List<ProjectStatus> projectStatusList = projectStatusRepository.findByProjectIdAndFreelancerEmail(projectId,
 				freelancerEmail);
+		
+		if (!projectStatusList.isEmpty()) {
+		    for (ProjectStatus projectStatus : projectStatusList) {
+		    	projectStatus.setClientStatus("Confirm");
+		    	if("Confirm".equals(projectStatus.getFreelancerStatus())){
+					CompletedProject completedProject = new CompletedProject();
+					completedProject.setClientId(projectStatus.getClientEmail());
+					completedProject.setFreelancerid(freelancerEmail);
+					completedProject.setProjectId(projectId);
+					System.out.print("\n++hello");
+					completedProjectService.save(completedProject);
+					projectService.updateDeletedProjectById(projectId);
+					deleteProjectStatus(projectId, freelancerEmail);
 
-		if (projectStatus != null) {
+				} else {
+					projectStatusRepository.save(projectStatus);
+				}
+		    }
+		}
 
-			projectStatus.setClientStatus("Confirm");
-			System.out.print("\n**helloout"+ " "+projectStatus.getClientStatus());
-			
-			if("Confirm".equals(projectStatus.getFreelancerStatus())){
-				CompletedProject completedProject = new CompletedProject();
-				completedProject.setClientId(projectStatus.getClientEmail());
-				completedProject.setFreelancerid(freelancerEmail);
-				completedProject.setProjectId(projectId);
-				System.out.print("\n++hello");
-				completedProjectService.save(completedProject);
-				deleteProjectStatus(projectId, freelancerEmail);
+		}
+	@Transactional
+	public void saveProjectStatusfreelancerActive(int projectId, String freelancerEmail) {
+		List<ProjectStatus> projectStatusList = projectStatusRepository.findByProjectIdAndFreelancerEmail(projectId,
+				freelancerEmail);
+		
+		if (!projectStatusList.isEmpty()) {
+		    for (ProjectStatus projectStatus : projectStatusList) {
+		    	projectStatus.setFreelancerStatus("Active");
+		        projectStatusRepository.save(projectStatus);
+		    }
+		}
 
-			} else {
-				projectStatusRepository.save(projectStatus);
-			}
+		}
+	@Transactional
+	public void saveProjectStatusClientActive(int projectId, String clientEmail) {
+		
+		List<ProjectStatus> projectStatusList = projectStatusRepository.findByProjectIdAndClientEmail(projectId, clientEmail);
 
-	}}
-	
+		if (!projectStatusList.isEmpty()) {
+		    for (ProjectStatus projectStatus : projectStatusList) {
+		        projectStatus.setClientStatus("Active");
+		        projectStatusRepository.save(projectStatus);
+		    }
+		}
+		}
 	
 
 	@Transactional
 	public void saveProjectStatusFreelancerConfirm(int projectId, String freelancerEmail) {
-		ProjectStatus projectStatus = projectStatusRepository.findByProjectIdAndFreelancerEmail(projectId,
+		List<ProjectStatus> projectStatusList = projectStatusRepository.findByProjectIdAndFreelancerEmail(projectId,
 				freelancerEmail);
 
-		if (projectStatus != null) {
+		
+		if (!projectStatusList.isEmpty()) {
+		    for (ProjectStatus projectStatus : projectStatusList) {
+		    	projectStatus.setFreelancerStatus("Confirm");
+		    	if("Confirm".equals(projectStatus.getClientStatus())){
+					CompletedProject completedProject = new CompletedProject();
+					completedProject.setClientId(projectStatus.getClientEmail());
+					completedProject.setFreelancerid(freelancerEmail);
+					completedProject.setProjectId(projectId);
+					System.out.print("hello");
+					completedProjectService.save(completedProject);
+					deleteProjectStatus(projectId, freelancerEmail);
 
-			projectStatus.setFreelancerStatus("Confirm");
-			System.out.print("helloout"+ " "+projectStatus.getClientStatus());
-			if("Confirm".equals(projectStatus.getClientStatus())){
-				CompletedProject completedProject = new CompletedProject();
-				completedProject.setClientId(projectStatus.getClientEmail());
-				completedProject.setFreelancerid(freelancerEmail);
-				completedProject.setProjectId(projectId);
-				System.out.print("hello");
-				completedProjectService.save(completedProject);
-				deleteProjectStatus(projectId, freelancerEmail);
-
-			} else {
-				projectStatusRepository.save(projectStatus);
-			}
+				} else {
+					projectStatusRepository.save(projectStatus);
+				}
+		        
+		    }
 		}
-
+		
 	}
 
 	public void savereview(CompletedProject completedProject) {
@@ -121,5 +149,6 @@ public class ProjectStatusService {
 		completedProjectRepository.findAll().forEach(project1 -> project.add(project1));
 		return project;
 	}
+	
 
 }

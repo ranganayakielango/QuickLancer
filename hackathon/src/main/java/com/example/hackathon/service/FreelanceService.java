@@ -1,5 +1,6 @@
 package com.example.hackathon.service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +28,9 @@ public class FreelanceService {
 	public Freelance update(Freelance freelance) {
 		return freelanceRepository.save(freelance);
 	}
+	
+	public Freelance getByEmailId(String email) {
+        return freelanceRepository.findByEmailId(email);
+    }
 
 }
