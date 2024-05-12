@@ -7,6 +7,23 @@ import json
 import logging
 from datetime import datetime, time
 import operator
+from flask_cors import CORS, cross_origin
+import flask_cors
+
+app = Flask(__name__)
+CORS(app, resources={r"*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000", "https://f6ad-103-6-159-161.ngrok-free.app"]}})
+cors = CORS(app)
+#flask_cors.cross_origin( 
+# origins = '*',  
+# methods = ['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'],  
+# headers = None,  
+# supports_credentials = False,  
+# max_age = None,  
+# send_wildcard = True,  
+# always_send = True,  
+# automatic_options = False
+# )
+#app.config['CORS_HEADERS'] = 'Content-Type'
 
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -43,6 +60,7 @@ def get_freelance():
     return r
 
 @app.route('/matching-client',methods=['GET'])
+@cross_origin()
 def matchingProject():
     fid = request.args.get('fid')
     app.logger.info('****************fid',fid)
@@ -97,6 +115,7 @@ def matchingProject():
     return jsonify(project_score)
 
 @app.route('/matching-freelancers',methods=['GET'])
+@cross_origin()
 def matchingFreelancers():
     try:
         pid = request.args.get('pid')
