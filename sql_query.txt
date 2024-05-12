@@ -1,0 +1,62 @@
+CREATE TABLE `hackathon`.`freelance` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `phone_number` VARCHAR(45) NULL,
+  `dob` DATETIME NULL,
+  `email_id` VARCHAR(45) NULL,
+  `experience` INT NULL,
+  `education_details` VARCHAR(45) NULL,
+  `digital_preference_link` VARCHAR(1000) NULL,
+  `language` VARCHAR(45) NULL,
+  `language_match` BOOLEAN NULL,
+  `self_description` VARCHAR(450) NULL,
+  `photo` BLOB NULL,
+  `resume` BLOB NULL,
+  `negotiable_time` VARCHAR(45) NULL,
+  `exp_salary_per_hour` INT NULL,
+  `salary_negotiable` VARCHAR(45) NULL,
+  `preferred_work_time_from` TIME NULL,
+  `preferred_work_time_to` TIME NULL,
+`time_zone` VARCHAR(45) NULL,
+`domain` VARCHAR(45) NULL,
+`technology` VARCHAR(50) NULL,
+`projects` VARCHAR(10000) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `hackathon`.`client` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `organization` VARCHAR(45) NULL,
+  `domain` VARCHAR(45) NULL,
+  `organization_website` VARCHAR(450) NULL,
+  `language` VARCHAR(45) NULL,
+  `language_match` BOOLEAN NULL,
+  `email` VARCHAR(45) NULL,
+  `phone_no` VARCHAR(20) NULL,
+  `timezone` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `hackathon`.`project` (
+  `id` INT NOT NULL,
+  `domain` VARCHAR(45) NULL,
+  `title` VARCHAR(45) NULL,
+  `description` VARCHAR(450) NULL,
+  `technology` VARCHAR(450) NULL,
+  `budget` INT NULL,
+  `negotiate_budget` BOOLEAN NULL,
+  `no_of_hours` FLOAT NULL,
+  `days_limit` INT NULL,
+  `comfort_time_from` TIME NULL,
+`comfort_time_to` TIME NULL,
+`timezone` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `hackathon`.`completedproject` (
+  `projectid` INT NOT NULL,
+  `clientid` VARCHAR(45) NULL,
+  `rating` VARCHAR(45) NULL,
+  `feedback` VARCHAR(450) NULL);
+
