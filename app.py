@@ -8,6 +8,14 @@ import logging
 from datetime import datetime, time
 import operator
 
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+def analyze_sentiment(review_text):
+    analyzer = SentimentIntensityAnalyzer()
+    sentiment_scores = analyzer.polarity_scores(review_text)
+    return sentiment_scores
+
 def is_time_between(start_time, end_time, check_time=None):
     check_time = check_time or datetime.utcnow().time()
     if start_time < end_time:
@@ -170,13 +178,17 @@ def matchingFreelancers():
                                 feedback_data = requests.get('https://6358-121-242-242-226.ngrok-free.app/completed-project/rating-and-review/freelancer/'+email)
                                 feedback_data = feedback_data.json()
                                 rating_sum = 0
+                                review_score_sum = 0
                                 for i in feedback_data:
                                     rating_sum + i['rating']
+                                    review_score_sum += analyze_sentiment(i['freelancerfeedback'])
                                 if rating_sum > 0:
                                     rating_avg = rating_sum / len(feedback_data)
+                                    review_score_avg = review_score_sum / len(feedback_data)
                                 else:
                                     rating_avg = 0
-                                freelancer_score[email] = avg_score + experience + (tech_match_count/10) + rating_avg/10
+                                    review_score_avg = 0
+                                freelancer_score[email] = avg_score + experience + (tech_match_count/10) + rating_avg/10 + review_score_avg
         sorted_dict = dict(sorted(freelancer_score.items(), key=operator.itemgetter(1)))
         return jsonify(sorted_dict)
     except Exception as e:
