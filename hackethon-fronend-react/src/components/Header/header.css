@@ -1,0 +1,63 @@
+/* src/components/Header.css */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  max-width: 80px; /* Adjust as needed */
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.profile img {
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  border-radius: 50%;
+}
+
+
+.profile {
+  position: relative; /* Position relative for absolute positioning of options */
+}
+
+.profile img {
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  border-radius: 50%;
+  cursor: pointer; /* Add cursor pointer to indicate clickable */
+}
+
+.options {
+  width: 100px;
+  position: absolute;
+  top: 50px; /* Adjust distance from profile image */
+  right: 10px; /* Adjust distance from right */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure options appear above other content */
+}
+
+.options ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options ul li:hover {
+  background-color: #f0f0f0;
+}

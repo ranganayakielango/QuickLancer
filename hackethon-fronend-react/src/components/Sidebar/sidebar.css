@@ -1,0 +1,42 @@
+/* Sidebar.css */
+
+.sidebar {
+  min-width: 200px;
+  height: 90vh;
+  background-color: #e2e2e2;
+  color: black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  padding: 5px;
+  margin-bottom: 20px;
+  font-size: 1.3rem; /* Larger font size for header */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 0.5rem;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar li:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.sidebar a {
+  color: #222; /* Link text color */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Smooth transition for link color */
+}
+
+.active {
+  background-color: #eee;
+  /* color: #846bf3; Link text color on hover */
+}
