@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.hackathon.entity.Client;
 
 public interface ClientRepository extends CrudRepository<Client, Integer>{ 
-	 Optional<Client> getByEmail(String email);
+	 Client getByEmail(String email);
 	 boolean existsByEmail(String email);
 }

@@ -1,23 +1,20 @@
 package com.example.hackathon.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.sql.Blob;
-import java.sql.Time;
-import java.util.Date;
 
 @Entity
 public class Freelance {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+ 
 
     private String name;
     private String phoneNumber;
-    private Date dob;
+    private LocalDate dob;
+    @Id
     private String emailId;
     private Integer experience;
     private String educationDetails;
@@ -25,29 +22,24 @@ public class Freelance {
     private String language;
     private Boolean languageMatch;
     private String selfDescription;
-    private Blob photo;
-    private Blob resume;
+    private byte[] photo;
+    private byte[] resume;
     private String negotiableTime;
     private Integer expSalaryPerHour;
     private String salaryNegotiable;
-    private Time preferredWorkTimeFrom;
-    private Time preferredWorkTimeTo;
+    private LocalTime preferredWorkTimeFrom;
+    private LocalTime preferredWorkTimeTo;
     private String timeZone;
     private String domain;
     private String technology;
+    private String projects;
 
     // Constructors
     public Freelance() {
     }
 
     // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     public String getName() {
         return name;
@@ -65,12 +57,12 @@ public class Freelance {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setDob(LocalDate localDateTime) {
+        this.dob = localDateTime;
     }
 
     public String getEmailId() {
@@ -129,22 +121,21 @@ public class Freelance {
         this.selfDescription = selfDescription;
     }
 
-    public Blob getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Blob photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
-    public Blob getResume() {
+    public byte[] getResume() {
         return resume;
     }
 
-    public void setResume(Blob resume) {
+    public void setResume(byte[] resume) {
         this.resume = resume;
     }
-
     public String getNegotiableTime() {
         return negotiableTime;
     }
@@ -169,19 +160,19 @@ public class Freelance {
         this.salaryNegotiable = salaryNegotiable;
     }
 
-    public Time getPreferredWorkTimeFrom() {
+    public LocalTime getPreferredWorkTimeFrom() {
         return preferredWorkTimeFrom;
     }
 
-    public void setPreferredWorkTimeFrom(Time preferredWorkTimeFrom) {
-        this.preferredWorkTimeFrom = preferredWorkTimeFrom;
+    public void setPreferredWorkTimeFrom(LocalTime localTime) {
+        this.preferredWorkTimeFrom = localTime;
     }
 
-    public Time getPreferredWorkTimeTo() {
+    public LocalTime getPreferredWorkTimeTo() {
         return preferredWorkTimeTo;
     }
 
-    public void setPreferredWorkTimeTo(Time preferredWorkTimeTo) {
+    public void setPreferredWorkTimeTo(LocalTime preferredWorkTimeTo) {
         this.preferredWorkTimeTo = preferredWorkTimeTo;
     }
 
@@ -208,4 +199,12 @@ public class Freelance {
     public void setTechnology(String technology) {
         this.technology = technology;
     }
+
+	public void setProjects(String projects) {
+		this.projects = projects;
+		
+	}
+	public String getProjects() {
+		return projects;
+	}
 }

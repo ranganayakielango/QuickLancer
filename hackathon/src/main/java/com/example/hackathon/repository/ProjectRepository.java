@@ -5,5 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.hackathon.entity.Project;
 
 public interface ProjectRepository extends CrudRepository<Project, Integer>{
+
+	Project findAllById(int projectId);
 	
 }

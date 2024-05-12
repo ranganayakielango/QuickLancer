@@ -1,10 +1,12 @@
 package com.example.hackathon.entity;
 
+import java.time.LocalTime;
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.sql.Time;
 
 @Entity
 public class Project {
@@ -19,13 +21,40 @@ public class Project {
     private String technology;
     private Integer budget;
     private Boolean negotiateBudget;
-    private Float noOfHours;
-    private Integer daysLimit;
-    private Time comfortTimeFrom;
-    private Time comfortTimeTo;
-    private String timezone;
+    private Boolean negotiateTime;
+    public Boolean getNegotiateTime() {
+		return negotiateTime;
+	}
 
-    // Constructors
+	public void setNegotiateTime(Boolean negotiateTime) {
+		this.negotiateTime = negotiateTime;
+	}
+
+	private Float noOfHours;
+    private Integer daysLimit;
+    private LocalTime comfortTimeFrom;
+    private LocalTime comfortTimeTo;
+    private String timezone;
+    private String clientEmail;
+    private Date date;
+
+    public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getClientEmail() {
+		return clientEmail;
+	}
+
+	public void setClientEmail(String clientEmail) {
+		this.clientEmail = clientEmail;
+	}
+
+	// Constructors
     public Project() {
     }
 
@@ -102,19 +131,19 @@ public class Project {
         this.daysLimit = daysLimit;
     }
 
-    public Time getComfortTimeFrom() {
+    public LocalTime getComfortTimeFrom() {
         return comfortTimeFrom;
     }
 
-    public void setComfortTimeFrom(Time comfortTimeFrom) {
+    public void setComfortTimeFrom(LocalTime comfortTimeFrom) {
         this.comfortTimeFrom = comfortTimeFrom;
     }
 
-    public Time getComfortTimeTo() {
+    public LocalTime getComfortTimeTo() {
         return comfortTimeTo;
     }
 
-    public void setComfortTimeTo(Time comfortTimeTo) {
+    public void setComfortTimeTo(LocalTime comfortTimeTo) {
         this.comfortTimeTo = comfortTimeTo;
     }
 

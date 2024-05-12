@@ -26,10 +26,12 @@ public class ClientService {
 	
 	 public Client save(Client client)   
 	{  
+		 
 		 if (clientRepository.existsByEmail(client.getEmail())) {
-	            // Handle the scenario where entity already exists
+	            
 	            throw new EntityAlreadyExistsException("Entity with ID " + client.getEmail() + " already exists");
 	        }
+		
 		return clientRepository.save(client);  
 	} 
 	 
@@ -42,7 +44,9 @@ public class ClientService {
 	 {  
 	 clientRepository.save(client);  
 	 }  
-	 public Optional<Client> getByEmailId(String email) {
+	 public Client getByEmailId(String email) {
 	        return clientRepository.getByEmail(email);
 	    }
+	 
+	 
 }
